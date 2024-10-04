@@ -19,6 +19,7 @@ function HomeCarousel({ carouselMovies }: HomeCarouselProps) {
               className="w-full aspect-[7/4]"
               alt=""
             />
+            <div className="absolute w-full h-full top-0 left-0 bg-black opacity-[0.1] hover:opacity-[0.2]"></div>
             <div className="absolute bottom-0 w-full h-44 _carouselGradient"></div>
           </div>
           <div className="absolute bottom-0 flex items-end gap-4 flex px-4">
