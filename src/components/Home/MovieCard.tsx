@@ -21,7 +21,11 @@ function MovieCard({ movieData }: MovieCardProps) {
         } duration-200`}
       >
         <div className="relative overflow-hidden">
-          <img src={imagepath + movieData.poster_path} alt="" />
+          <img
+            src={imagepath + movieData.poster_path}
+            className="aspect-[3/4]"
+            alt=""
+          />
           <div className="absolute -bottom-6 w-full h-28 _carouselGradient"></div>
         </div>
         <div className="bg-[#222] p-2">
