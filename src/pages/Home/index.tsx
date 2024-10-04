@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import HomeSlider from "../../components/Home/HomeSlider";
 import { baseApi } from "../../api/axiosInstance";
+import { MovieCard } from "../../utils/constant";
 
 function Home() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<MovieCard[]>([]);
 
   const fetchMovies = async () => {
     try {
@@ -20,6 +21,10 @@ function Home() {
   useEffect(() => {
     fetchMovies();
   }, []);
+
+  useEffect(() => {
+    console.log(movies);
+  }, [movies]);
 
   return (
     <div className="w-[90%] mx-auto">
