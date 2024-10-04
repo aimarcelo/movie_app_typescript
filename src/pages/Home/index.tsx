@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HomeSlider from "../../components/Home/HomeSlider";
 import { baseApi } from "../../api/axiosInstance";
 import { MovieCard } from "../../utils/constant";
+import MovieList from "../../components/Home/MovieList";
 
 function Home() {
   const [movies, setMovies] = useState<MovieCard[]>([]);
@@ -29,6 +30,7 @@ function Home() {
   return (
     <div className="w-[90%] mx-auto">
       <HomeSlider />
+      <MovieList movies={movies} />
     </div>
   );
 }
