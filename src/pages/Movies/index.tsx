@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { category, CategoryType } from "../../utils/constant";
+import { category, MovieCardType } from "../../utils/constant";
 import { baseApi } from "../../api/axiosInstance";
+import MovieList from "../../components/Home/MovieList";
 
 function Movies() {
   const [filter, setFilter] = useState(category[0].name);
 
-  const [nowPlaying, setNowPlaying] = useState<CategoryType[]>([]);
-  const [popular, setPopular] = useState<CategoryType[]>([]);
-  const [topRated, setTopRated] = useState<CategoryType[]>([]);
-  const [upcoming, setUpcoming] = useState<CategoryType[]>([]);
+  const [nowPlaying, setNowPlaying] = useState<MovieCardType[]>([]);
+  const [popular, setPopular] = useState<MovieCardType[]>([]);
+  const [topRated, setTopRated] = useState<MovieCardType[]>([]);
+  const [upcoming, setUpcoming] = useState<MovieCardType[]>([]);
 
   const toggleSelection = (item: string) => {
     setFilter(item);
@@ -68,6 +69,10 @@ function Movies() {
           </div>
         ))}
       </div>
+      {filter == "Now Playing" && <MovieList movies={nowPlaying} />}
+      {filter == "Popular" && <MovieList movies={popular} />}
+      {filter == "Top Rated" && <MovieList movies={topRated} />}
+      {filter == "Upcoming" && <MovieList movies={upcoming} />}
     </div>
   );
 }
