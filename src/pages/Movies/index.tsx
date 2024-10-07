@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { category, MovieCardType } from "../../utils/constant";
 import { baseApi } from "../../api/axiosInstance";
 import MovieList from "../../components/Home/MovieList";
+import LoadMoreBtn from "../../components/Button/LoadMoreBtn";
+
+interface PageType {
+  [key: string]: number;
+}
 
 function Movies() {
   const [filter, setFilter] = useState(category[0].name);
@@ -10,30 +15,36 @@ function Movies() {
   const [popular, setPopular] = useState<MovieCardType[]>([]);
   const [topRated, setTopRated] = useState<MovieCardType[]>([]);
   const [upcoming, setUpcoming] = useState<MovieCardType[]>([]);
+  const [pages, setPages] = useState<PageType>({
+    now_playing: 1,
+    popular: 1,
+    top_rated: 1,
+    upcoming: 1,
+  });
 
   const toggleSelection = (item: string) => {
     setFilter(item);
   };
 
-  const fetchMovies = async (path: string) => {
+  const fetchMovies = async (path: string, page: number) => {
     try {
       console.log(path);
       const response = await baseApi.get(
-        `/3/movie/${path}?language=en-US&page=1`
+        `/3/movie/${path}?language=en-US&page=${page}`
       );
       console.log(response.data.results);
       switch (path) {
         case "now_playing":
-          setNowPlaying(response.data.results);
+          setNowPlaying((prev) => [...prev, ...response.data.results]);
           break;
         case "popular":
-          setPopular(response.data.results);
+          setPopular((prev) => [...prev, ...response.data.results]);
           break;
         case "top_rated":
-          setTopRated(response.data.results);
+          setTopRated((prev) => [...prev, ...response.data.results]);
           break;
         case "upcoming":
-          setUpcoming(response.data.results);
+          setUpcoming((prev) => [...prev, ...response.data.results]);
           break;
         default:
           break;
@@ -43,10 +54,21 @@ function Movies() {
     }
   };
 
+  const handleLoadMore = () => {
+    const currentCategory = category.find((item) => item.name == filter);
+    if (currentCategory) {
+      setPages((prev) => ({
+        ...prev,
+        [currentCategory.path]: prev[currentCategory.path] + 1,
+      }));
+      fetchMovies(currentCategory.path, pages[currentCategory.path] + 1);
+    }
+  };
+
   useEffect(() => {
     const current = category.filter((item) => item.name == filter);
     console.log(current);
-    fetchMovies(current[0].path);
+    fetchMovies(current[0].path, 1);
   }, [filter]);
 
   return (
@@ -73,6 +95,9 @@ function Movies() {
       {filter == "Popular" && <MovieList movies={popular} />}
       {filter == "Top Rated" && <MovieList movies={topRated} />}
       {filter == "Upcoming" && <MovieList movies={upcoming} />}
+      <div onClick={handleLoadMore}>
+        <LoadMoreBtn />
+      </div>
     </div>
   );
 }
