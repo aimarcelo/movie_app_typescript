@@ -1,12 +1,13 @@
-import React from 'react'
+import React from "react";
+import { useParams } from "react-router-dom";
 
 function Details() {
-  return (
-    <div>
-      Details
-    </div>
-  )
+  const params = useParams();
+
+  console.log(params);
+
+  return <div>Details</div>;
 }
 
-export default Details
-Details
+export default Details;
+Details;

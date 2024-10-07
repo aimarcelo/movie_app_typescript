@@ -20,7 +20,7 @@ function App() {
             }
           />
           <Route
-            path="/moviedetails/:id"
+            path="/details/:id"
             element={
               <h1>
                 <Details />
