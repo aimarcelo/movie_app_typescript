@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { baseApi } from "../../api/axiosInstance";
 import { imagepath, MovieDetailType } from "../../utils/constant";
+import Trailers from "../../components/MovieDetails/Trailers";
 
 function Details() {
   const params = useParams();
@@ -66,6 +67,7 @@ function Details() {
                   </div>
                 </div>
               </div>
+              <Trailers />
             </div>
           </div>
         </div>
