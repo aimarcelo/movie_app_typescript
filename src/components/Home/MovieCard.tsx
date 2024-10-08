@@ -11,7 +11,7 @@ function MovieCard({ movieData }: MovieCardProps) {
   const [hover, setHover] = useState<number | null>(null);
 
   return (
-    <Link to={`details/${movieData.id}`}>
+    <Link to={`/details/${movieData.id}`}>
       <div
         className="col"
         onMouseEnter={() => setHover(movieData.id)}
