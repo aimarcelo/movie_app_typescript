@@ -36,7 +36,7 @@ export interface MovieDetailType {
   backdrop_path: string,
   original_title: string,
   release_date: string,
-  tag_line: string,
+  tagline: string,
   overview: string,
   genres: {name: string}[],
   vote_average: number,
