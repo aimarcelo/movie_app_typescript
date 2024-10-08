@@ -1,16 +1,27 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { baseApi } from "../../api/axiosInstance";
 import { CarouselMovieType } from "../../utils/constant";
 import CarouselMiniCard from "../Home/CarouselMiniCard";
+import { IoClose } from "react-icons/io5";
 
 function Navbar() {
   const [search, setSearch] = useState("");
-
   const [searchedList, setSearchedList] = useState<CarouselMovieType[]>([]);
+  const [showSearch, setShowSearch] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
+  };
+
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == "Enter") {
+      (event?.target as HTMLInputElement).blur();
+    }
+  };
+
+  const toggleShow = (bool: boolean) => {
+    setShowSearch(bool);
   };
 
   const fetchSearch = async () => {
@@ -26,6 +37,11 @@ function Navbar() {
   };
 
   useEffect(() => {
+    if (search.length > 0) {
+      setShowSearch(true);
+    } else {
+      setShowSearch(false);
+    }
     fetchSearch();
   }, [search]);
 
@@ -45,29 +61,43 @@ function Navbar() {
             </button>
           </Link>
         </div>
-        <div className="">
+        <div className="relative">
           <input
             placeholder="search"
             type="text"
             className="w-[500px] h-10 bg-black text-[#c2c2c2] text-md outline-none px-4 placeholder:text-[#646464] rounded-xl"
             onChange={handleChange}
+            onKeyDown={handleKeyPress}
+            onClick={() => {
+              toggleShow(true);
+            }}
           />
-          <div className="relative">
-            <div className="absolute z-50 left-0 w-full bg-zinc-800 rounded-xl">
-              <div className="py-3 pl-5">
-                <div className="flex flex-col gap-2 h-fit max-h-[380px] overflow-y-auto">
-                  {searchedList.length > 0 &&
-                    searchedList.map((item, ind) => (
-                      <CarouselMiniCard
-                        carouselMovies={searchedList}
-                        item={ind}
-                        ind={ind}
-                      />
-                    ))}
+          {showSearch && search.length > 0 && (
+            <div
+              className="absolute z-30 top-2 right-1 text-yellow-500 text-2xl"
+              onClick={() => toggleShow(false)}
+            >
+              <IoClose />
+            </div>
+          )}
+          {showSearch && (
+            <div className="relative" onClick={() => toggleShow(false)}>
+              <div className="absolute z-50 left-0 w-full bg-zinc-800 rounded-xl">
+                <div className="py-3 pl-5">
+                  <div className="flex flex-col gap-2 h-fit max-h-[380px] overflow-y-auto">
+                    {searchedList.length > 0 &&
+                      searchedList.map((item, ind) => (
+                        <CarouselMiniCard
+                          carouselMovies={searchedList}
+                          item={ind}
+                          ind={ind}
+                        />
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </nav>
