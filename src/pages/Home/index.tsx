@@ -33,10 +33,10 @@ function Home() {
   return (
     <div className="xl:w-[90%] md:w-[95%] mx-auto mb-44">
       <HomeSlider />
-      {/* <MovieList movies={movies} title={"Top Rated Movies"} />
+      <MovieList movies={movies} title={"Top Rated Movies"} />
       <div onClick={() => handlePageUpdate()}>
         <LoadMoreBtn />
-      </div> */}
+      </div>
     </div>
   );
 }

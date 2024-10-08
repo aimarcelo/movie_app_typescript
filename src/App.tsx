@@ -11,7 +11,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route
+          <Route
             path="/movies"
             element={
               <h1>
@@ -27,7 +27,7 @@ function App() {
               </h1>
             }
           />
-          <Route path="*" element={<Navigate to="/" />} /> */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
     </div>
