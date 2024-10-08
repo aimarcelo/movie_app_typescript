@@ -52,8 +52,8 @@ function HomeSlider() {
 
   return (
     <div className="row">
-      <div className="relative col-8">
-        <div id="carouselExample" className="carousel slide">
+      <div className="relative col-xl-8">
+        <div id="carouselExample" className="carousel slide h-full">
           <HomeCarousel carouselMovies={carouselMovies} />
           <button
             className="carousel-control-prev"
@@ -82,7 +82,7 @@ function HomeSlider() {
         </div>
       </div>
       <div className="col-4">
-        <HomeCarouselList next={next} carouselMovies={carouselMovies} />
+        {/* <HomeCarouselList next={next} carouselMovies={carouselMovies} /> */}
       </div>
     </div>
   );
