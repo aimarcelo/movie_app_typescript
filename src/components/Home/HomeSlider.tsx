@@ -81,8 +81,8 @@ function HomeSlider() {
           </button>
         </div>
       </div>
-      <div className="col-4">
-        {/* <HomeCarouselList next={next} carouselMovies={carouselMovies} /> */}
+      <div className="col-xl-4 lg:block hidden">
+        <HomeCarouselList next={next} carouselMovies={carouselMovies} />
       </div>
     </div>
   );
