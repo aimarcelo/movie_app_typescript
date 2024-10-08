@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { baseApi } from "../../api/axiosInstance";
 import YouTube from "react-youtube";
 
-function Trailers() {
+function Trailers({ movieId }: { movieId: string }) {
   const [trailers, setTrailers] = useState<{ key: string; name: string }[]>([]);
 
   const fetchTrailers = async () => {
     try {
-      const response = await baseApi.get(`3/movie/238/videos?language=en-US`);
+      const response = await baseApi.get(
+        `3/movie/${movieId}/videos?language=en-US`
+      );
       console.log(response.data.results);
       const trailerObject = response.data.results.filter(
         (data: { type: string }) => data.type == "Trailer"
@@ -20,7 +22,7 @@ function Trailers() {
 
   useEffect(() => {
     fetchTrailers();
-  }, []);
+  }, [movieId]);
 
   const options = {
     height: "280",
