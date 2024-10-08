@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { baseApi } from "../../api/axiosInstance";
 import { CarouselMovieType } from "../../utils/constant";
+import CarouselMiniCard from "../Home/CarouselMiniCard";
 
 function Navbar() {
   const [search, setSearch] = useState("");
@@ -50,7 +51,23 @@ function Navbar() {
             type="text"
             className="w-[500px] h-10 bg-black text-[#c2c2c2] text-md outline-none px-4 placeholder:text-[#646464] rounded-xl"
             onChange={handleChange}
-          ></input>
+          />
+          <div className="relative">
+            <div className="absolute z-50 left-0 w-full bg-zinc-800 rounded-xl">
+              <div className="py-3 pl-5">
+                <div className="flex flex-col gap-2 h-fit max-h-[380px] overflow-y-auto">
+                  {searchedList.length > 0 &&
+                    searchedList.map((item, ind) => (
+                      <CarouselMiniCard
+                        carouselMovies={searchedList}
+                        item={ind}
+                        ind={ind}
+                      />
+                    ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
