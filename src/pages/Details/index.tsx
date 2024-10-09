@@ -4,6 +4,7 @@ import { baseApi } from "../../api/axiosInstance";
 import { imagepath, MovieDetailType } from "../../utils/constant";
 import Trailers from "../../components/MovieDetails/Trailers";
 import SimilarMovies from "../../components/MovieDetails/SimilarMovies";
+import DetailsSkeleton from "../../components/Skeleton/DetailsSkeleton";
 
 function Details() {
   const params = useParams();
@@ -27,13 +28,13 @@ function Details() {
 
   return (
     <div>
-      {details && params.id && (
+      {details && params.id ? (
         <div className="relative h-fit w-full">
           <div className="relative">
             <img
               src={imagepath + details?.backdrop_path}
               alt="background"
-              className="opacity-40 w-full min-h-[500px] aspect-[7/4] object-center"
+              className="opacity-40 w-full min-h-[500px] aspect-[7/4] object-cover"
             />
             <div className="absolute bottom-0 w-full h-full _carouselGradient"></div>
           </div>
@@ -42,7 +43,7 @@ function Details() {
               <div className="md:flex gap-8">
                 <img
                   src={imagepath + details?.poster_path}
-                  className="lg:w-[350px] md:w-[280px] sm:w-[250px] w-[200px] h-fit"
+                  className="lg:w-[350px] md:w-[280px] sm:w-[250px] w-[200px] h-fit aspect-[4/6]"
                 />
                 <div className="lg:text-5xl md:text-4xl sm:text-3xl text-2xl">
                   <h1>
@@ -73,6 +74,8 @@ function Details() {
             </div>
           </div>
         </div>
+      ) : (
+        <DetailsSkeleton />
       )}
     </div>
   );
