@@ -1,6 +1,7 @@
 import React from "react";
-import { imagepath, MovieCardType } from "../../utils/constant";
+import { MovieCardType } from "../../utils/constant";
 import MovieCard from "./MovieCard";
+import MovieCardSkeleton from "../Skeleton/MovieCardSkeleton";
 
 interface MovieListProps {
   movies: MovieCardType[];
@@ -16,8 +17,10 @@ function MovieList({ movies, title }: MovieListProps) {
         </h1>
       )}
       <div className="row row-cols-xl-6 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-2">
-        {movies.length > 0 &&
-          movies.map((data, ind) => <MovieCard key={ind} movieData={data} />)}
+        {movies.length > 0
+          ? movies.length > 0 &&
+            movies.map((data, ind) => <MovieCard key={ind} movieData={data} />)
+          : [...Array(12)].map((item) => <MovieCardSkeleton />)}
       </div>
     </div>
   );
