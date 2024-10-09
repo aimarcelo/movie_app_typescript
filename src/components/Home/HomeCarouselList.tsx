@@ -1,4 +1,5 @@
 import { CarouselMovieType } from "../../utils/constant";
+import CarouselMiniCardSkeleton from "../Skeleton/CarouselMiniCardSkeleton";
 import CarouselMiniCard from "./CarouselMiniCard";
 
 interface HomeCarouselListProps {
@@ -11,13 +12,15 @@ function HomeCarouselList({ next, carouselMovies }: HomeCarouselListProps) {
     <div>
       <h1 className="font-bold text-xl text-yellow-500">Up next</h1>
       <div className="row">
-        {next.map((item, ind) => (
-          <CarouselMiniCard
-            carouselMovies={carouselMovies}
-            item={item}
-            ind={ind}
-          />
-        ))}
+        {carouselMovies.length > 0
+          ? next.map((item, ind) => (
+              <CarouselMiniCard
+                carouselMovies={carouselMovies}
+                item={item}
+                ind={ind}
+              />
+            ))
+          : [...Array(3)].map((item) => <CarouselMiniCardSkeleton />)}
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ function CarouselMiniCard({
       >
         <img
           src={imagepath + carouselMovies[item]?.poster_path}
-          className="w-[100px]"
+          className="w-[100px] aspect-[4/6]"
           alt=""
         />
         <div className="flex flex-col justify-between py-2">
