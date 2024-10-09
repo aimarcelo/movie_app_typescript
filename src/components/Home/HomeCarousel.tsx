@@ -21,7 +21,7 @@ function HomeCarousel({ carouselMovies }: HomeCarouselProps) {
               {/* <div className="block bg-red-300 aspect-[7/4]"></div> */}
               <img
                 src={imagepath + movie?.backdrop_path}
-                className="w-full h-full min-h-[300px] object-cover"
+                className="w-full h-full min-h-[300px] object-cover aspect-[7/4]"
                 alt=""
               />
               <div className="absolute w-full h-full top-0 left-0 bg-black opacity-[0.1] hover:opacity-[0.2]"></div>
